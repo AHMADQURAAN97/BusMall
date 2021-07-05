@@ -7,18 +7,21 @@ let middleImgEl = document.getElementById('middleImg');
 let rightImgEl = document.getElementById('rightImg');
 let ulEl = document.getElementById('results');
 
+const btn2 = document.querySelector("button");
 let catalogs = [];
 let attempts = 1;
 let maxAttempts = 25;
-
-
-
+let catalogsName =[];
+let votes = [];
+let views = [];
+let comeImg = [];
 function catalogImage(catalogName) {
 
     this.cName = catalogName.split('.')[0];
     this.img = 'images/' + catalogName;
     this.votes = 0;
     this.views = 0;
+    catalogsName.push(this.cName);
     catalogs.push(this);
 }
 
@@ -44,10 +47,15 @@ function renderRandomImg() {
    middleIndex= randomIndex();
    rightIndex= randomIndex();
 
-    while (leftIndex === rightIndex || rightIndex === middleIndex || leftIndex ===middleIndex) {
+    while (leftIndex === rightIndex || rightIndex === middleIndex || leftIndex ===middleIndex || comeImg.includes(leftIndex) || comeImg.includes(rightIndex) || comeImg.includes(middleIndex)) {
         leftIndex = randomIndex();
         rightIndex = randomIndex();
+        middleIndex = randomIndex();
     }
+    comeImg = [];
+    comeImg.push(leftIndex);
+    comeImg.push(rightIndex);
+    comeImg.push(middleIndex);
 
     leftImgEl.setAttribute('src', catalogs[leftIndex].img);
     middleImgEl.setAttribute('src', catalogs[middleIndex].img);
@@ -86,16 +94,72 @@ function handelClicks(event) {
 }
 renderRandomImg();
 
-} else { let ulEl = document.getElementById('results');
+} else { function show() {
+    let h3 = document.createElement("h3");
+    h3.textContent = "RESULTS";
+    btn1.appendChild(h3);
+
+
+
 for (let i = 0; i < catalogs.length; i++) {
     let liEl = document.createElement('li');
     liEl.textContent = `${catalogs[i].cName} has ${catalogs[i].votes} votes and ${catalogs[i].views} views .`
     ulEl.appendChild(liEl);
-
+    votes.push(catalogs[i].votes);
+    views.push(catalogs[i].views);
 }
         leftImgEl.removeEventListener('click', handelClicks);
         middleImgEl.removeEventListener('click', handelClicks); 
         rightImgEl.removeEventListener('click', handelClicks);
+        chartRender();
+}
+btn2.onclick = show;
 }
 attempts++;
+}
+
+
+function chartRender(){
+
+    let ctx = document.getElementById('myChart').getContext('2d');
+    let myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: catalogsName,
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                   
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                 
+                ],
+                borderWidth: 2
+            },   
+            {
+                label: '# of views',
+                data: views,
+                backgroundColor: [
+                    'rgba(155, 199, 120, 0.2)',
+                ],
+                borderColor: [
+                    'rgba(200, 70, 210, 0.2)',
+                ],
+                borderWidth: 2
+        
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+
+
 }
