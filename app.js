@@ -7,6 +7,7 @@ let middleImgEl = document.getElementById('middleImg');
 let rightImgEl = document.getElementById('rightImg');
 let ulEl = document.getElementById('results');
 
+const btn2 = document.querySelector("button");
 let catalogs = [];
 let attempts = 1;
 let maxAttempts = 25;
@@ -86,7 +87,13 @@ function handelClicks(event) {
 }
 renderRandomImg();
 
-} else { let ulEl = document.getElementById('results');
+} else { function show() {
+    let h3 = document.createElement("h3");
+    h3.textContent = "RESULTS";
+    btn1.appendChild(h3);
+
+
+
 for (let i = 0; i < catalogs.length; i++) {
     let liEl = document.createElement('li');
     liEl.textContent = `${catalogs[i].cName} has ${catalogs[i].votes} votes and ${catalogs[i].views} views .`
@@ -96,6 +103,8 @@ for (let i = 0; i < catalogs.length; i++) {
         leftImgEl.removeEventListener('click', handelClicks);
         middleImgEl.removeEventListener('click', handelClicks); 
         rightImgEl.removeEventListener('click', handelClicks);
+}
+btn2.onclick = show;
 }
 attempts++;
 }
