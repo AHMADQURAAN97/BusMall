@@ -128,7 +128,7 @@ function chartRender(){
             labels: catalogsName,
             datasets: [{
                 label: '# of Votes',
-                data: views,
+                data: votes,
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                    
