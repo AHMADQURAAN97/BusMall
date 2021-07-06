@@ -116,6 +116,7 @@ for (let i = 0; i < catalogs.length; i++) {
 btn2.onclick = show;
 }
 attempts++;
+saveTolocalStorage ();
 }
 
 
@@ -163,3 +164,17 @@ function chartRender(){
 
 
 }
+
+function saveTolocalStorage (){
+
+    let saveLocal =JSON.stringify(catalogs);
+    localStorage.setItem('catalog',saveLocal)
+}
+
+function readFromLocalStorage (){
+
+    let stringObj=localStorage.getItem('catalog');
+    let normalObj=JSON.parse(stringObj);
+    catalogs=normalObj;
+}
+readFromLocalStorage ();
