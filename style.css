@@ -3,3 +3,42 @@ width: 150px;
 
 }
 
+#container {
+    margin-left: 30%;
+}
+
+#btn {
+    margin-left: 40%;
+
+}
+h1 {
+    text-align: center;
+   
+
+}
+
+body {
+    background-color: blanchedalmond;
+}
+
+#catalogInBus  {
+    width: 90%;
+}
+
+
+  #information {
+      float:right;
+      text-decoration: none;
+      text-decoration-style: none;
+     text-decoration-line: none;
+     margin-left: 50rem;
+
+  }
+
+  #information ul li a {
+
+    text-decoration: none;
+    text-decoration-style: none;
+   text-decoration-line: none;
+   padding: 2rem;
+  }

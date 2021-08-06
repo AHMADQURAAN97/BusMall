@@ -175,6 +175,8 @@ function readFromLocalStorage (){
 
     let stringObj=localStorage.getItem('catalog');
     let normalObj=JSON.parse(stringObj);
-    catalogs=normalObj;
+    if (normalObj !== null){
+        catalogs=normalObj;
+    }
 }
 readFromLocalStorage ();
